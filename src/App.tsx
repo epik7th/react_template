@@ -4,8 +4,6 @@ import viteLogo from '/vite.svg'
 import './App.scss'
 import * as React from 'react'
 
-const currentYear = new Date().getFullYear()
-
 export const App: React.FC = () => {
 	const [count, setCount] = useState(0)
 
@@ -27,7 +25,6 @@ export const App: React.FC = () => {
 				</p>
 			</div>
 			<p className="read-the-docs">Click on the Vite and React logos to learn more</p>
-			<p>Текущий год {currentYear}</p>
 		</>
 	)
 }
