@@ -1,14 +1,18 @@
+// декларативный
 import { useState } from 'react'
 import ReactLogo from './assets/react.svg?react'
 import viteLogo from '/vite.svg'
 import './App.scss'
 import * as React from 'react'
 
-const currentYear = new Date().getFullYear()
+// декларативный
+const currentYear: number = new Date().getFullYear()
 
 export const App: React.FC = () => {
+	// декларативный
 	const [count, setCount] = useState(0)
 
+	// декларативный, кроме обработчика событий: setCount((count) => count + 1) это императивный
 	return (
 		<>
 			<div>
