@@ -1,30 +1,59 @@
 import { useState } from 'react'
-import ReactLogo from './assets/react.svg?react'
-import viteLogo from '/vite.svg'
 import styles from './App.module.scss'
 import * as React from 'react'
+import data from './data.json'
+import { IDataType } from './IDataType.ts'
 
 export const App: React.FC = () => {
-	const [count, setCount] = useState(0)
+	const [steps] = useState<IDataType[]>(data)
+	const [activeIndex, setActiveIndex] = useState<number>(0)
+
+	const nextStep = () => {
+		setActiveIndex(activeIndex + 1)
+	}
+	const prevStep = () => {
+		setActiveIndex(activeIndex - 1)
+	}
+	const resetStep = () => {
+		setActiveIndex(0)
+	}
+
+	const isStartStep = activeIndex === 0
+	const isEndStep = activeIndex === steps.length - 1
 
 	return (
-		<div className={styles.root}>
-			<div>
-				<a href="https://vite.dev" target="_blank">
-					<img src={viteLogo} className={styles.logo} alt="Vite logo" />
-				</a>
-				<a href="https://react.dev" target="_blank">
-					<ReactLogo className={`${styles.logo} ${styles.react}`} />
-				</a>
-			</div>
-			<h1>Vite + React</h1>
+		<div className={styles.container}>
 			<div className={styles.card}>
-				<button onClick={() => setCount((count) => count + 1)}>count is {count}</button>
-				<p>
-					Edit <code>src/App.tsx</code> and save to test HMR
-				</p>
+				<h1>Инструкция по готовке пельменей</h1>
+				<div className={styles.steps}>
+					<div className={styles['steps-content']}>{steps[activeIndex].content}</div>
+					<ul className={styles['steps-list']}>
+						{steps.map((item, i) => (
+							<li
+								className={
+									styles['steps-item'] +
+									(activeIndex >= i ? ' ' + styles.done : '') +
+									(activeIndex === i ? ' ' + styles.active : '')
+								}
+								key={item.id}
+							>
+								<button className={styles['steps-item-button']} onClick={() => setActiveIndex(i)}>
+									{i + 1}
+								</button>
+								{item.title}
+							</li>
+						))}
+					</ul>
+					<div className={styles['buttons-container']}>
+						<button className={styles.button} onClick={prevStep} disabled={isStartStep}>
+							Назад
+						</button>
+						<button className={styles.button} onClick={isEndStep ? resetStep : nextStep}>
+							{isEndStep ? 'Начать сначала' : 'Далее'}
+						</button>
+					</div>
+				</div>
 			</div>
-			<p className={styles.readTheDocs}>Click on the Vite and React logos to learn more</p>
 		</div>
 	)
 }
