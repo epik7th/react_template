@@ -1,43 +1,72 @@
-.root {
-	max-width: 1280px;
-	margin: 0 auto;
-	padding: 2rem;
+.app {
 	text-align: center;
+	max-width: 700px;
+	margin: 0 auto;
+	padding: 20px;
 }
 
-.logo {
-	height: 6em;
-	width: 6em;
-	padding: 1.5em;
-	will-change: filter;
-	transition: filter 300ms;
-	&:hover {
-		filter: drop-shadow(0 0 2em #646cffaa);
-	}
-	&.react:hover {
-		filter: drop-shadow(0 0 2em #61dafbaa);
-	}
+.error {
+	color: var(--error-color);
+	font-weight: bold;
 }
 
-@keyframes logo-spin {
-	from {
-		transform: rotate(0deg);
-	}
-	to {
-		transform: rotate(360deg);
-	}
+.pageHeading {
+	margin: 0 0 0.5rem;
+	font-size: 25px;
+	font-weight: bold;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-	a:nth-of-type(2) .logo {
-		animation: logo-spin infinite 20s linear;
-	}
+.noMarginText {
+	margin: 0;
 }
 
-.card {
-	padding: 2em;
+.currentValue {
+	font-weight: bold;
 }
 
-.readTheDocs {
-	color: #888;
+.buttonsContainer {
+	margin-top: 1.5rem;
+	display: flex;
+	justify-content: center;
+	gap: 10px;
+}
+
+.button {
+	padding: 0.5em 0.75em;
+	background-color: hsl(var(--accent-color-hue), var(--accent-color-saturation), 92%);
+	font-size: 18px;
+	border: none;
+	transition: background-color 0.15s ease;
+}
+
+.button:hover {
+	background-color: hsl(var(--accent-color-hue), var(--accent-color-saturation), 87%);
+}
+
+.button:active {
+	background-color: hsl(var(--accent-color-hue), var(--accent-color-saturation), 82%);
+}
+
+.button:disabled {
+	background-color: var(--disabled-color);
+}
+
+.listContainer {
+	margin-top: 1.5rem;
+}
+
+.listHeading {
+	font-size: 20px;
+	font-weight: bold;
+	margin: 0 0 0.5rem;
+}
+
+.list {
+	text-align: left;
+	margin: 0 auto;
+	max-width: 300px;
+}
+
+.listItem:not(:last-child) {
+	margin-bottom: 0.5em;
 }
