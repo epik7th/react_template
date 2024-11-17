@@ -1,43 +1,56 @@
-.root {
-	max-width: 1280px;
+.calculator {
 	margin: 0 auto;
-	padding: 2rem;
-	text-align: center;
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	grid-template-rows: auto 1fr;
+	gap: 8px;
+	border: 1px solid #4e4e4e;
+	width: 180px;
+	border-radius: 8px;
+	padding: 10px;
 }
-
-.logo {
-	height: 6em;
-	width: 6em;
-	padding: 1.5em;
-	will-change: filter;
-	transition: filter 300ms;
-	&:hover {
-		filter: drop-shadow(0 0 2em #646cffaa);
-	}
-	&.react:hover {
-		filter: drop-shadow(0 0 2em #61dafbaa);
+.button {
+	border-radius: 50%;
+	height: 40px;
+	width: 40px;
+	background-color: #4e4e4e;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 16px;
+	cursor: pointer;
+}
+.button:focus {
+	outline: none;
+}
+.nums {
+	grid-row-start: 2;
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	grid-template-rows: repeat(4, 1fr);
+	grid-column-gap: 5px;
+	grid-row-gap: 5px;
+	& > .button{
+		background-color: gray;
 	}
 }
-
-@keyframes logo-spin {
-	from {
-		transform: rotate(0deg);
-	}
-	to {
-		transform: rotate(360deg);
-	}
+.buttons {
+	grid-row-start: 2;
+	display: grid;
+	grid-template-columns: repeat(1, 1fr);
+	grid-template-rows: repeat(4, 1fr);
+	grid-column-gap: 5px;
+	grid-row-gap: 5px;
 }
-
-@media (prefers-reduced-motion: no-preference) {
-	a:nth-of-type(2) .logo {
-		animation: logo-spin infinite 20s linear;
-	}
+.display {
+	grid-column: span 2 / span 2;
+	width: 100%;
+	min-height: 50px;
+	font-size: 26px;
+	display: flex;
+	align-items: end;
+	justify-content: end;
 }
-
-.card {
-	padding: 2em;
-}
-
-.readTheDocs {
-	color: #888;
+.showResult {
+	color: green;
 }

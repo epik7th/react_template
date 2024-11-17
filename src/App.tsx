@@ -1,30 +1,62 @@
 import { useState } from 'react'
-import ReactLogo from './assets/react.svg?react'
-import viteLogo from '/vite.svg'
 import styles from './App.module.scss'
 import * as React from 'react'
 
-export const App: React.FC = () => {
-	const [count, setCount] = useState(0)
+const NUMS: string[] = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0']
+const BUTTONS: string[] = ['C', '+', '-', '=']
 
+export const App: React.FC = () => {
+	const [operand1, setOperand1] = useState<string>('')
+	const [operand2, setOperand2] = useState<string>('')
+	const [operator, setOperator] = useState<string>('')
+	const [showResult, setShowResult] = useState<boolean>(false)
+	const numHandler = (num: string) => {
+		setShowResult(false)
+		if (operator === '') {
+			setOperand1(operand1 + num)
+		} else {
+			setOperand2(operand2 + num)
+		}
+	}
+	const buttonHandler = (action: string) => {
+		if (action === '+' || action === '-') {
+			setOperator(action)
+			setShowResult(false)
+		} else if (action === 'C') {
+			setShowResult(false)
+			setOperator('')
+			setOperand1('')
+			setOperand2('')
+		} else if (action === '=' && operand1 !== '' && operand2 !== '') {
+			setShowResult(true)
+			setOperand2('')
+			setOperator('')
+			if (operator === '+') {
+				setOperand1(String(Number(operand1) + Number(operand2)))
+			} else if (operator === '-') {
+				setOperand1(String(Number(operand1) - Number(operand2)))
+			}
+		}
+	}
 	return (
-		<div className={styles.root}>
-			<div>
-				<a href="https://vite.dev" target="_blank">
-					<img src={viteLogo} className={styles.logo} alt="Vite logo" />
-				</a>
-				<a href="https://react.dev" target="_blank">
-					<ReactLogo className={`${styles.logo} ${styles.react}`} />
-				</a>
+		<div className={styles.calculator}>
+			<div className={styles.display + ' ' + (showResult ? styles.showResult : '')}>
+				{operand1 + operator + operand2}
 			</div>
-			<h1>Vite + React</h1>
-			<div className={styles.card}>
-				<button onClick={() => setCount((count) => count + 1)}>count is {count}</button>
-				<p>
-					Edit <code>src/App.tsx</code> and save to test HMR
-				</p>
+			<div className={styles.nums}>
+				{NUMS.map((item) => (
+					<button key={item} onClick={() => numHandler(item)} className={styles.button}>
+						{item}
+					</button>
+				))}
 			</div>
-			<p className={styles.readTheDocs}>Click on the Vite and React logos to learn more</p>
+			<div className={styles.buttons}>
+				{BUTTONS.map((item) => (
+					<button key={item} onClick={() => buttonHandler(item)} className={styles.button}>
+						{item}
+					</button>
+				))}
+			</div>
 		</div>
 	)
 }
