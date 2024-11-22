@@ -1,0 +1,12 @@
+.button {
+	border: none;
+	background-color: #5d4991;
+	cursor: pointer;
+	color: #fff;
+	&:focus {
+		outline: none;
+	}
+	&:hover {
+		background-color: #6a569c;
+	}
+}
