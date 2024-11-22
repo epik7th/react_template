@@ -2,8 +2,11 @@ import { useState } from 'react'
 import styles from './App.module.scss'
 import * as React from 'react'
 
-const NUMS: string[] = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0']
-const BUTTONS: string[] = ['C', '+', '-', '=']
+type Nums = '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9' | '0'
+type Buttons = 'C' | '+' | '-' | '='
+
+const NUMS: Nums[] = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0']
+const BUTTONS: Buttons[] = ['C', '+', '-', '=']
 
 export const App: React.FC = () => {
 	const [operand1, setOperand1] = useState<string>('')
