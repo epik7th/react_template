@@ -15,7 +15,7 @@ export const AddTodo: React.FC<{ successAdd: () => void }> = ({ successAdd }) =>
 			successAdd()
 			setNewTask('')
 		}
-	}, [isSuccess])
+	}, [isSuccess, successAdd])
 	return (
 		<>
 			{error && <div className={styles.error}>{error}</div>}

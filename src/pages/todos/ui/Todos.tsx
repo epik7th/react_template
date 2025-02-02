@@ -1,21 +1,20 @@
-import * as React from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import styles from './Todos.module.scss'
 import { AddTodo, SearchTodo, SortTodo } from '../../../features'
 import { Todo, useGetTodo } from '../../../entities'
-import { useEffect, useState } from 'react'
 
 export const Todos: React.FC = () => {
 	const [searchText, setSearchText] = useState<string>('')
 	const [sort, setSort] = useState<boolean>(false)
 	const { get, data, loading, error } = useGetTodo()
 
-	const getTodos = () => {
-		get({ searchText, sort })
-	}
+	const getTodos = useCallback(() => {
+		void get(searchText, sort)
+	}, [get, searchText, sort])
 
 	useEffect(() => {
 		getTodos()
-	}, [searchText, sort])
+	}, [getTodos])
 	return (
 		<>
 			<h1>Задачи</h1>

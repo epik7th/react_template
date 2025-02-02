@@ -16,7 +16,7 @@ export const Todo: React.FC<{ todo: ITodo; successUpdate: () => void }> = ({ tod
 		if (isSuccessUpdate || isSuccessRemove) {
 			successUpdate()
 		}
-	}, [isSuccessUpdate, isSuccessRemove])
+	}, [isSuccessUpdate, isSuccessRemove, successUpdate])
 	return (
 		<div className={'todo'}>
 			<input onChange={completeChangeHandler} type="checkbox" checked={todo.completed} />

@@ -1,17 +1,12 @@
-import { useState } from 'react'
+import { useCallback, useState } from 'react'
 import { ITodo } from '../model/ITodo'
-
-interface GetTodoInputs {
-	searchText: string
-	sort: boolean
-}
 
 export const useGetTodo = () => {
 	const [data, setData] = useState<ITodo[] | null>([])
 	const [loading, setLoading] = useState<boolean>(false)
 	const [error, setError] = useState<string | null>()
 
-	const fetchData = async (searchText: string, sort: boolean): Promise<void> => {
+	const get = useCallback(async (searchText: string, sort: boolean): Promise<void> => {
 		try {
 			setLoading(true)
 			const result: ITodo[] = await fetch(
@@ -23,11 +18,7 @@ export const useGetTodo = () => {
 		} finally {
 			setLoading(false)
 		}
-	}
-
-	const get = ({ searchText, sort }: GetTodoInputs) => {
-		void fetchData(searchText, sort)
-	}
+	}, [])
 
 	return { get, data, loading, error }
 }
@@ -38,7 +29,7 @@ export const useUpdateTodo = () => {
 	const [isSuccess, setIsSuccess] = useState<boolean>(false)
 	const [error, setError] = useState<string | null>()
 
-	const update = async (id: string, data: Omit<Partial<ITodo>, 'id'>): Promise<void> => {
+	const update = useCallback(async (id: string, data: Omit<Partial<ITodo>, 'id'>): Promise<void> => {
 		try {
 			setIsSuccess(false)
 			setLoading(true)
@@ -57,7 +48,7 @@ export const useUpdateTodo = () => {
 		} finally {
 			setLoading(false)
 		}
-	}
+	}, [])
 
 	return { update, data, loading, error, isSuccess }
 }
@@ -67,7 +58,7 @@ export const useRemoveTodo = () => {
 	const [isSuccess, setIsSuccess] = useState<boolean>(false)
 	const [error, setError] = useState<string | null>()
 
-	const remove = async (id: string): Promise<void> => {
+	const remove = useCallback(async (id: string): Promise<void> => {
 		try {
 			setIsSuccess(false)
 			setLoading(true)
@@ -86,7 +77,7 @@ export const useRemoveTodo = () => {
 		} finally {
 			setLoading(false)
 		}
-	}
+	}, [])
 
 	return { remove, loading, error, isSuccess }
 }
@@ -97,7 +88,7 @@ export const useAddTodo = () => {
 	const [isSuccess, setIsSuccess] = useState<boolean>(false)
 	const [error, setError] = useState<string | null>()
 
-	const add = async (data: Omit<ITodo, 'id'>): Promise<void> => {
+	const add = useCallback(async (data: Omit<ITodo, 'id'>): Promise<void> => {
 		try {
 			setIsSuccess(false)
 			setLoading(true)
@@ -116,7 +107,7 @@ export const useAddTodo = () => {
 		} finally {
 			setLoading(false)
 		}
-	}
+	}, [])
 
 	return { add, data, loading, error, isSuccess }
 }
