@@ -21,17 +21,6 @@
 		"noUnusedParameters": true,
 		"noFallthroughCasesInSwitch": true,
 		"noUncheckedSideEffectImports": true,
-
-		"paths": {
-			"@/*": ["src/*"],
-			"@components/*": ["src/components/*"],
-			"@assets/*": ["src/assets/*"],
-			"@hooks/*": ["src/hooks/*"],
-			"@models/*": ["src/models/*"],
-			"@store/*": ["src/store/*"],
-			"@services/*": ["src/services/*"],
-			"@utils/*": ["src/utils/*"],
-		}
 	},
 	"include": ["src"]
 }

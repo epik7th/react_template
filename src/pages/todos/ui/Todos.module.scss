@@ -1,0 +1,17 @@
+.list {
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+}
+.error {
+	color: #c53434;
+	padding: 1rem;
+	border: 1px solid #c53434;
+	background-color: #eaafaf;
+	border-radius: 3px;
+}
+.filterRow {
+	display: flex;
+	flex-direction: row;
+	gap: 1rem;
+}

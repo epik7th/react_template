@@ -7,18 +7,6 @@ import { resolve } from 'path'
 export default defineConfig({
 	plugins: [react(), svgr()],
 	envDir: resolve(__dirname, './'),
-	resolve: {
-		alias: {
-			'@': resolve(__dirname, './src'),
-			'@assets': resolve(__dirname, './src/assets'),
-			'@components': resolve(__dirname, './src/components'),
-			'@hooks': resolve(__dirname, './src/hooks'),
-			'@models': resolve(__dirname, './src/models'),
-			'@services': resolve(__dirname, './src/services'),
-			'@store': resolve(__dirname, './src/store'),
-			'@utils': resolve(__dirname, './src/utils'),
-		},
-	},
 	css: {
 		preprocessorOptions: {
 			scss: {
@@ -27,7 +15,6 @@ export default defineConfig({
 		},
 	},
 	build: {
-		// sourcemap: true,
 		minify: 'terser',
 		terserOptions: {
 			compress: {
@@ -38,17 +25,6 @@ export default defineConfig({
 			format: {
 				comments: false,
 			},
-		},
-		rollupOptions: {
-			output: {
-				// manualChunks(id) {
-				// 	if (id.includes('node_modules')) {
-				// 		return id.toString().split('node_modules/')[1].split('/')[0].toString().replace('@', 'dog_')
-				// 	}
-				// },
-				// sourcemap: true,
-			},
-			plugins: [],
 		},
 	},
 })
