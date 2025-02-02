@@ -1,7 +1,7 @@
 import { useCallback, useState } from 'react'
 import { ITodo } from '../model/ITodo'
 
-export const useGetTodo = () => {
+export const useGetTodos = () => {
 	const [data, setData] = useState<ITodo[] | null>([])
 	const [loading, setLoading] = useState<boolean>(false)
 	const [error, setError] = useState<string | null>()
@@ -15,6 +15,25 @@ export const useGetTodo = () => {
 			setData(result)
 		} catch {
 			setError('Ошибка получения списка задач')
+		} finally {
+			setLoading(false)
+		}
+	}, [])
+
+	return { get, data, loading, error }
+}
+export const useGetTodo = () => {
+	const [data, setData] = useState<ITodo | null>()
+	const [loading, setLoading] = useState<boolean>(false)
+	const [error, setError] = useState<string | null>()
+
+	const get = useCallback(async (id: string): Promise<void> => {
+		try {
+			setLoading(true)
+			const result: ITodo = await fetch(`http://localhost:3000/todos/${id}`).then<ITodo>((response) => response.json())
+			setData(result)
+		} catch {
+			setError('Ошибка получения задачи')
 		} finally {
 			setLoading(false)
 		}
