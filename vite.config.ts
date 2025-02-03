@@ -2,21 +2,15 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react-swc'
 import svgr from 'vite-plugin-svgr'
 import { resolve } from 'path'
+import tsconfigPaths from 'vite-tsconfig-paths'
 
 // https://vite.dev/config/
 export default defineConfig({
-	plugins: [react(), svgr()],
+	plugins: [react(), tsconfigPaths(), svgr()],
 	envDir: resolve(__dirname, './'),
 	resolve: {
 		alias: {
 			'@': resolve(__dirname, './src'),
-			'@assets': resolve(__dirname, './src/assets'),
-			'@components': resolve(__dirname, './src/components'),
-			'@hooks': resolve(__dirname, './src/hooks'),
-			'@models': resolve(__dirname, './src/models'),
-			'@services': resolve(__dirname, './src/services'),
-			'@store': resolve(__dirname, './src/store'),
-			'@utils': resolve(__dirname, './src/utils'),
 		},
 	},
 	css: {
